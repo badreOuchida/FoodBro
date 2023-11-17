@@ -30,6 +30,3 @@ Welcome to FitnessTrackerX, your go-to platform for achieving your fitness and n
 Start your journey to a healthier, fitter you with FitnessTrackerX. Sign up today and take the first step towards a better you!
 
 ### 👥 Contributors
-
-
-
