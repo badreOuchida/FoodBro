@@ -25,19 +25,21 @@ public class DbInteractor {
 		
 		// provide FileInputStream with the path for your config.properties file
 		
-        try (FileInputStream input = new FileInputStream("C:\\Users\\ouchi\\eclipse-workspace\\FoodBroo\\config.properties")) 
+        try (FileInputStream input = new FileInputStream("C:\\Users\\ouchi\\eclipse-workspace\\FoodBr\\config.properties")) 
         {
             properties.load(input);
         } catch (IOException e) {
             e.printStackTrace();
         }
         
-        String dbDriver = properties.getProperty("db.driver");
+        String dbDriver = properties.getProperty("db.drive");
         String dbUrl = properties.getProperty("db.url");
         String dbUsername = properties.getProperty("db.username");
-        String dbPassword = properties.getProperty("db.password");		
-		
+        String dbPassword = properties.getProperty("db.password");	
+        
+        
 		try {
+			
 			Class.forName(dbDriver);
 			String url = dbUrl;
 			String username = dbUsername;
