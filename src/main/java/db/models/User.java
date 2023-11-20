@@ -17,7 +17,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", first_name=" + first_name + ", last_name=" + last_name + "]";
+		return "User [username=" + username + ", first_name=" + first_name + ", last_name=" + last_name + ", birtday=" + birthday + "]";
 	}
 
 	public int getId() {

@@ -4,12 +4,16 @@ import java.io.Serializable;
 
 import db.dao.user.IUser;
 import db.dao.user.UserDao;
-import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpSession;
+
 
 @Named
-@RequestScoped
+@SessionScoped
 public class User implements Serializable {
 	
 	
@@ -50,18 +54,11 @@ public class User implements Serializable {
 	
 	public String submitAction() {
 		IUser dao = new UserDao();
-		 user  = dao.getUser(1);
+		user  = dao.getUser(1);
 		
 		return "eng/user.xhtml";
 	}
-	
-	
-	public String submitLogout()
-	{
-		System.out.println("logout");
-		return "error.html";
-	}
-	
+
 	public String getMail() {
 		return mail;
 	}
@@ -100,5 +97,34 @@ public class User implements Serializable {
 		return 10;
 	}
 	
+	
+	
+	public String submitLogin() {
+        IUser userDao = new UserDao();
+        user = userDao.getUser(1); // userDao.getUser(login, password);
+        System.out.println(user);
+        if (user != null) {
+        	HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            session.setAttribute("user", user);
+        	// Redirect to a secure page
+            return "/eng/dashbord.xhtml?faces-redirect=true";
+        } else {
+            return "login.xhtml"; // Stay on the same page
+        }
+    }
+	
+	public String submitLogout()
+	{
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        externalContext.invalidateSession();
+		return "/login.xhtml";
+	}
+	
+	
+	public String submitEdit()
+	{
+		return "/eng/user.xhtml?faces-redirect=true";
+	}
 	
 }

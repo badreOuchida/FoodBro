@@ -28,7 +28,7 @@
 							<i class="pi pi-sign-out"></i>
 						</div>
 						<div class="menu-container">
-							<a href="dashbord.xhtml">	
+							<a href="/eng/dashbord.xhtml">	
 								<i class="pi pi-home"></i>
 							</a>
 							<a href="meals.xhtml">	
@@ -47,9 +47,9 @@
 							
 						</div>
 					
-						<div class="logout-container">
-							 <p:commandButton type="button" action="#{user.submitLogout}" icon="pi pi-sign-out" styleClass="rounded-button ui-button-secondary ui-button-flat" />
-						</div>
+						<h:form class="logout-container">
+							 <p:commandButton action="#{user.submitLogout}" icon="pi pi-sign-out" styleClass="rounded-button ui-button-secondary ui-button-flat" />
+						</h:form>
 					</div>
 				</div>
 			</div>

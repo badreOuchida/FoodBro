@@ -28,7 +28,7 @@
 							<i class="pi pi-sign-out"></i>
 						</div>
 						<div class="menu-container">
-							<a href="dashbord.xhtml">	
+							<a href="/JSFjack/eng/dashbord.xhtml">	
 								<i class="pi pi-home"></i>
 							</a>
 							<a href="meals.xhtml">	
@@ -81,21 +81,21 @@
 		<!-- dashbord items -->
 		<div class="main-dashbord pb-4" style="height:100vh; display:block">
 				<div class="d-flex justify-content-center align-items-center">
-					<div style="width:80%">
+					<h:form method="post" style="width:80%">
 						<!-- Nom et prenom -->
 						<div class="d-flex justify-content-center align-items-center">
 							<div class="group-input d-flex">
 								<div class="input-container">
 									<div class="field d-flex flex-column">
 								        <p:outputLabel for="nom" styleClass="block fs-5 fw-medium text-secondary">Nom :</p:outputLabel>
-								        <p:inputText id="nom" styleClass="block" value="#{user.nom}"/>
+								        <p:inputText id="nom" styleClass="block" value="#{user.user.first_name}"/>
 								        
 								    </div>
 								</div>
 								<div class="input-container">
 									<div class="field d-flex flex-column">
 								        <p:outputLabel for="prenom" styleClass="block fs-5 fw-medium text-secondary">Prenom :</p:outputLabel>
-								        <p:inputText  id="prenom" styleClass="block" value="#{user.prenom}"/>
+								        <p:inputText  id="prenom" styleClass="block" value="#{user.user.last_name}"/>
 								    </div>
 								</div>
 							</div>
@@ -107,7 +107,7 @@
 								<div class="input-container">
 									<div class="field d-flex flex-column">
 								        <p:outputLabel for="mail" styleClass="block fs-5 fw-medium text-secondary">Mail :</p:outputLabel>
-								        <p:inputText id="mail" styleClass="block" value="#{user.mail}"/>
+								        <p:inputText id="mail" styleClass="block" value="#{user.user.email}"/>
 								        
 								    </div>
 								</div>
@@ -119,14 +119,69 @@
 								</div>
 							</div>
 						</div>
-					</div>
+						
+						<!-- status et sex -->
+						<div class="d-flex justify-content-center align-items-center my-3">
+							
+							<div class="group-input d-flex">
+								<div class="input-container">
+									<div class="field d-flex flex-column">
+								        <p:outputLabel for="status" styleClass="block fs-5 fw-medium text-secondary">Status :</p:outputLabel>
+								        <p:inputText id="status" styleClass="block" value="#{user.user.status}"/>
+								        
+								    </div>
+								</div>
+								<div class="input-container">
+									<div class="field d-flex flex-column">
+								        <p:outputLabel for="sex" styleClass="block fs-5 fw-medium text-secondary">Sex :</p:outputLabel>
+								        <p:inputText  id="sex" styleClass="block" value="#{user.user.sex}"/>
+								    </div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- birthday -->
+						<div class="d-flex justify-content-center align-items-center my-3">
+							
+							<div class="group-input d-flex birthday">
+								<div class="input-container" style="width:100%">
+									<div class="field d-flex flex-column">
+								        <p:outputLabel for="birthday" styleClass="block fs-5 fw-medium text-secondary">Birthday :</p:outputLabel>
+								        <p:inputText id="birthday" type="date" styleClass="block" value="#{user.user.birthday}"/>
+								    </div>
+								</div>
+							</div>
+						</div>
+						<!-- height && weight -->
+						<div class="d-flex justify-content-center align-items-center my-3">
+							
+							<div class="group-input d-flex">
+								<div class="input-container">
+									<div class="field d-flex flex-column">
+								        <p:outputLabel for="height" styleClass="block fs-5 fw-medium text-secondary">Height :</p:outputLabel>
+								        <p:inputText id="height" styleClass="block" value="#{user.user.height}"/>
+								        
+								    </div>
+								</div>
+								
+								<div class="input-container">
+									<div class="field d-flex flex-column">
+								        <p:outputLabel for="weight" styleClass="block fs-5 fw-medium text-secondary">Weight :</p:outputLabel>
+								        <p:inputText id="weight" styleClass="block" value="#{user.user.weight}"/>
+								        
+								    </div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- button -->
+						
+						<div class="d-flex justify-content-center align-items-center my-5" style="margin-right:130px">
+							<p:commandButton  value="Submit" action="#{user.submitEdit}" styleClass="rounded-button ui-button-success"/>
+						</div>	
+					</h:form>
 				
 				</div>
-				
-				<div>
-					Hello bro #{user.user.username}
-				</div>
-				
 		</div>
 		
 			

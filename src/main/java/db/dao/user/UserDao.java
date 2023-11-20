@@ -1,9 +1,14 @@
 package db.dao.user;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 import db.conn.DbInteractor;
 
@@ -11,7 +16,26 @@ import db.models.User;
 
 public class UserDao  implements IUser {
 	
-private DbInteractor db ;
+	private static String configPath = "C:\\Users\\ouchi\\eclipse-workspace\\FoodBr\\config.properties";
+	
+	private static String storedSalt()
+	{
+		Properties properties = new Properties();
+		
+		// provide FileInputStream with the path for your config.properties file
+		
+        try (FileInputStream input = new FileInputStream(configPath)) 
+        {
+            properties.load(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        String storedSalt = properties.getProperty("salt");
+		return storedSalt;	
+	}
+	
+	private DbInteractor db ;
 	
 	public UserDao() {
 		db = DbInteractor.getInstance();
@@ -56,10 +80,10 @@ private DbInteractor db ;
 	@Override
 	public int addUser(User user,String password) {
 		
-		
+		String hashedPassword = BCrypt.hashpw(password,storedSalt() );
 		
 		String sql = "INSERT INTO users (id, username, first_name, last_name, email, password ,status, sex, birthday, height, weight)"
-				+ "VALUES ('"+user.getUsername()+"','"+user.getFirst_name()+"', '"+user.getLast_name()+"', '"+user.getEmail()+"', '"+password+"', '"+user.getStatus()+"', '"+user.getSex()+"', '"+(new java.sql.Date(user.getBirthday().getTime()))+"', "+user.getHeight()+", "+user.getWeight()+");";
+				+ "VALUES ('"+user.getUsername()+"','"+user.getFirst_name()+"', '"+user.getLast_name()+"', '"+user.getEmail()+"', '"+hashedPassword+"', '"+user.getStatus()+"', '"+user.getSex()+"', '"+(new java.sql.Date(user.getBirthday().getTime()))+"', "+user.getHeight()+", "+user.getWeight()+");";
 		
 		int res = db.maj(sql);
 		
@@ -112,8 +136,9 @@ private DbInteractor db ;
 
 	@Override
 	public User getUser(String username,String password) {
+		String hashedPassword = BCrypt.hashpw(password,storedSalt() );
 		User user = null; 
-		String sql = "SELECT * FROM users WHERE username = '" + username + "' AND password = '"+password+"'";
+		String sql = "SELECT * FROM users WHERE username = '" + username + "' AND password = '"+hashedPassword+"'";
 		ResultSet res = db.select(sql);
 		
 		try {
