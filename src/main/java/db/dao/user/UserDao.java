@@ -64,7 +64,7 @@ public class UserDao  implements IUser {
 				user.setEmail(res.getString(5));
 				user.setStatus(res.getString(7));
 				user.setSex(res.getString(8));
-				user.setBirthday(res.getDate(9));
+				user.setBirthday(res.getString(9));
 				user.setHeight(res.getInt(10));
 				user.setWeight(res.getInt(11));
 				
@@ -82,8 +82,8 @@ public class UserDao  implements IUser {
 		
 		String hashedPassword = BCrypt.hashpw(password,storedSalt() );
 		
-		String sql = "INSERT INTO users (id, username, first_name, last_name, email, password ,status, sex, birthday, height, weight)"
-				+ "VALUES ('"+user.getUsername()+"','"+user.getFirst_name()+"', '"+user.getLast_name()+"', '"+user.getEmail()+"', '"+hashedPassword+"', '"+user.getStatus()+"', '"+user.getSex()+"', '"+(new java.sql.Date(user.getBirthday().getTime()))+"', "+user.getHeight()+", "+user.getWeight()+");";
+		String sql = "INSERT INTO users (username, first_name, last_name, email, password ,status, sex, birthday, height, weight)"
+				+ "VALUES ('"+user.getUsername()+"','"+user.getFirst_name()+"', '"+user.getLast_name()+"', '"+user.getEmail()+"', '"+hashedPassword+"', '"+user.getStatus()+"', '"+user.getSex()+"', '"+user.getBirthday()+"', "+user.getHeight()+", "+user.getWeight()+");";
 		
 		int res = db.maj(sql);
 		
@@ -108,7 +108,7 @@ public class UserDao  implements IUser {
 				user.setEmail(res.getString(5));
 				user.setStatus(res.getString(7));
 				user.setSex(res.getString(8));
-				user.setBirthday(res.getDate(9));
+				user.setBirthday(res.getString(9));
 				user.setHeight(res.getInt(10));
 				user.setWeight(res.getInt(11));
 			}
@@ -121,14 +121,15 @@ public class UserDao  implements IUser {
 
 	@Override
 	public int editUser(int id,User user) {
-		String sql = "UPDATE users SET username="+user.getUsername()+", first_name="+user.getFirst_name()+", last_name="+user.getLast_name()+", email="+user.getEmail()+", status="+user.getStatus()+", sex="+user.getSex()+", birthday="+(new java.sql.Date(user.getBirthday().getTime()))+", height="+user.getHeight()+", weight="+user.getWeight()+" WHERE id="+user.getId()+"";
+		String sql = "UPDATE users SET username='"+user.getUsername()+"', first_name='"+user.getFirst_name()+"', last_name='"+user.getLast_name()+"', email='"+user.getEmail()+"', status='"+user.getStatus()+"', sex='"+user.getSex()+"', birthday='"+user.getBirthday()+"', height='"+user.getHeight()+"', weight='"+user.getWeight()+"' WHERE user_id="+user.getId()+"";
+		System.out.println(sql);
 		int res = db.maj(sql);
 		return res;	
 	}
 
 	@Override
 	public int deleteUser(int id) {
-		String sql = "DELETE FROM users WHERE id = "+id ;
+		String sql = "DELETE FROM users WHERE user_id = "+id ;
 		int res = db.maj(sql);
 		return res;
 	}
@@ -153,7 +154,7 @@ public class UserDao  implements IUser {
 				user.setEmail(res.getString(5));
 				user.setStatus(res.getString(7));
 				user.setSex(res.getString(8));
-				user.setBirthday(res.getDate(9));
+				user.setBirthday(res.getString(9));
 				user.setHeight(res.getInt(10));
 				user.setWeight(res.getInt(11));
 				

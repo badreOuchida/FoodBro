@@ -124,6 +124,10 @@ public class User implements Serializable {
 	
 	public String submitEdit()
 	{
+		IUser userDao = new UserDao();
+        
+		userDao.editUser(user.getId(), user);
+		
 		return "/eng/user.xhtml?faces-redirect=true";
 	}
 	
