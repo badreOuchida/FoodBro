@@ -17,8 +17,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter("/eng/user/*") // to filter the request , based on the current session
-public class AuthenticationFilter implements Filter {
+@WebFilter(urlPatterns = {"/eng/home.xhtml", "/eng/register.xhtml"})
+
+public class HomePageFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -29,15 +30,13 @@ public class AuthenticationFilter implements Filter {
     	HttpSession session = (HttpSession) ((HttpServletRequest) request).getSession(false);
     	
     	if(session != null && session.getAttribute("user") != null) {
-    		chain.doFilter(request, response); 
-    	}else {
     		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-    	    httpServletResponse.sendRedirect("/JSFjack/eng/home.xhtml");
+    	    httpServletResponse.sendRedirect("/JSFjack/eng/user/dashbord.xhtml");
+    	}else {
+    		chain.doFilter(request, response);
+    		
     	}
-
-    	
-        
-        
+    
     }
 
 }

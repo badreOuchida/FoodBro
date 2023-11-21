@@ -29,7 +29,7 @@
     
     <filter-mapping>
         <filter-name>InvalidLinkFilter</filter-name>
-        <url-pattern>/eng/*</url-pattern> <!-- Specify the URLs or patterns you want to validate and redirect -->
+        <url-pattern>/eng/*</url-pattern> 
     </filter-mapping>
      
     <!-- second filter --> 
@@ -41,8 +41,27 @@
 	
 	<filter-mapping>
 	    <filter-name>AuthenticationFilter</filter-name>
-	    <url-pattern>/eng/user/*</url-pattern> <!-- Specify the URLs or patterns you want to secure -->
+	    <url-pattern>/eng/user/*</url-pattern> 
 	</filter-mapping>
+	
+	<!-- third filter -->
+	
+	<filter>
+        <filter-name>HomePageFilter</filter-name>
+        <filter-class>utils.filter.HomePageFilter</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>HomePageFilter</filter-name>
+        <url-pattern>/eng/home.xhtml</url-pattern> 
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>HomePageFilter</filter-name>
+        <url-pattern>/eng/register.xhtml</url-pattern> 
+    </filter-mapping>
+    
+    
 	
 	 
 </web-app>
