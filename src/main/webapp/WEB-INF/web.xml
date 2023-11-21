@@ -28,6 +28,6 @@
 
 	<filter-mapping>
 	    <filter-name>AuthenticationFilter</filter-name>
-	    <url-pattern>/eng/*</url-pattern> <!-- Specify the URLs or patterns you want to secure -->
+	    <url-pattern>/eng/user/*</url-pattern> <!-- Specify the URLs or patterns you want to secure -->
 	</filter-mapping>
 </web-app>
