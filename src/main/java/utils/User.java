@@ -50,15 +50,6 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	
-	
-	public String submitAction() {
-		IUser dao = new UserDao();
-		user  = dao.getUser(1);
-		
-		return "eng/user.xhtml";
-	}
-
 	public String getMail() {
 		return mail;
 	}
@@ -101,13 +92,16 @@ public class User implements Serializable {
 	
 	public String submitLogin() {
         IUser userDao = new UserDao();
-        user = userDao.getUser(1); // userDao.getUser(login, password);
-        System.out.println(user);
+        
+        
+        user = userDao.getUser(login,password);
+        
         if (user != null) {
         	HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             session.setAttribute("user", user);
         	// Redirect to a secure page
-            return "/eng/dashbord.xhtml?faces-redirect=true";
+            System.out.println("I'm logged in bro");
+            return "/eng/user/dashbord.xhtml?faces-redirect=true";
         } else {
             return "login.xhtml"; // Stay on the same page
         }
@@ -118,7 +112,7 @@ public class User implements Serializable {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         externalContext.invalidateSession();
-		return "/login.xhtml";
+		return "/eng/home.xhtml";
 	}
 	
 	
@@ -128,7 +122,7 @@ public class User implements Serializable {
         
 		userDao.editUser(user.getId(), user);
 		
-		return "/eng/user.xhtml?faces-redirect=true";
+		return "/eng/user/user.xhtml?faces-redirect=true";
 	}
 	
 }

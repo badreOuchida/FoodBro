@@ -80,10 +80,11 @@ public class UserDao  implements IUser {
 	@Override
 	public int addUser(User user,String password) {
 		
-		String hashedPassword = BCrypt.hashpw(password,storedSalt() );
+		String salt = BCrypt.gensalt();
+		String hashedPassword = BCrypt.hashpw(password,salt );
 		
-		String sql = "INSERT INTO users (username, first_name, last_name, email, password ,status, sex, birthday, height, weight)"
-				+ "VALUES ('"+user.getUsername()+"','"+user.getFirst_name()+"', '"+user.getLast_name()+"', '"+user.getEmail()+"', '"+hashedPassword+"', '"+user.getStatus()+"', '"+user.getSex()+"', '"+user.getBirthday()+"', "+user.getHeight()+", "+user.getWeight()+");";
+		String sql = "INSERT INTO users (username, first_name, last_name, email, password ,status, sex, birthday, height, weight,salt)"
+				+ "VALUES ('"+user.getUsername()+"','"+user.getFirst_name()+"', '"+user.getLast_name()+"', '"+user.getEmail()+"', '"+hashedPassword+"', '"+user.getStatus()+"', '"+user.getSex()+"', '"+user.getBirthday()+"', "+user.getHeight()+", "+user.getWeight()+",'"+salt+"');";
 		
 		int res = db.maj(sql);
 		
@@ -94,7 +95,6 @@ public class UserDao  implements IUser {
 	public User getUser(int id) {
 		User user = null; 
 		String sql = "SELECT * FROM users WHERE user_id = " + id;
-		System.out.println("la requete est : " + sql);
 		ResultSet res = db.select(sql);
 		try {
 			if(res.next())
@@ -137,26 +137,36 @@ public class UserDao  implements IUser {
 
 	@Override
 	public User getUser(String username,String password) {
-		String hashedPassword = BCrypt.hashpw(password,storedSalt() );
+		// String hashedPassword = BCrypt.hashpw(password,salt);
 		User user = null; 
-		String sql = "SELECT * FROM users WHERE username = '" + username + "' AND password = '"+hashedPassword+"'";
+		String sql = "SELECT * FROM users WHERE username = '" + username + "'";
 		ResultSet res = db.select(sql);
 		
 		try {
 			if(res.next())
 			{
-				user = new User();
 				
-				user.setId(res.getInt(1));
-				user.setUsername(res.getString(2));
-				user.setFirst_name(res.getString(3));
-				user.setLast_name(res.getString(4));
-				user.setEmail(res.getString(5));
-				user.setStatus(res.getString(7));
-				user.setSex(res.getString(8));
-				user.setBirthday(res.getString(9));
-				user.setHeight(res.getInt(10));
-				user.setWeight(res.getInt(11));
+				
+				String salt = res.getString(12); // 12 is the column index for salt column in the database 
+				String hashedPassword = res.getString(6);
+				String _hashedPassword = BCrypt.hashpw(password,salt);
+				
+				if( hashedPassword.equals(_hashedPassword) )
+				{
+					user = new User();
+					
+					user.setId(res.getInt(1));
+					user.setUsername(res.getString(2));
+					user.setFirst_name(res.getString(3));
+					user.setLast_name(res.getString(4));
+					user.setEmail(res.getString(5));
+					user.setStatus(res.getString(7));
+					user.setSex(res.getString(8));
+					user.setBirthday(res.getString(9));
+					user.setHeight(res.getInt(10));
+					user.setWeight(res.getInt(11));
+				}
+				
 				
 			}
 		} catch (SQLException e) {
