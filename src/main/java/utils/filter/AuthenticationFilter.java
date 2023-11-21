@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter("/eng/*") // to filter the request , based on the current session
+@WebFilter("/eng/user/*") // to filter the request , based on the current session
 public class AuthenticationFilter implements Filter {
 
     @Override
@@ -33,23 +33,12 @@ public class AuthenticationFilter implements Filter {
     		chain.doFilter(request, response); 
     	}else {
     		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-    	    httpServletResponse.sendRedirect("/JSFjack/login.xhtml");
+    	    httpServletResponse.sendRedirect("/JSFjack/eng/home.xhtml");
     	}
 
     	
         
-        /*
-        boolean loggedIn = (_request.getUserPrincipal() != null);
         
-        System.out.println("_request.getUserPrincipal()"+_request.getUserPrincipal());
-
-        if (loggedIn) {
-            chain.doFilter(request, response);
-        } else {
-        	request.getRequestDispatcher("/login.xhtml").forward(request, response);
-        }
-        */
     }
 
-    // Implement other Filter methods (init, destroy) if needed
 }
