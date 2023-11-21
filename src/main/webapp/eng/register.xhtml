@@ -20,6 +20,102 @@
 </h:head>
 
 <h:body>
-	register
+    <section class="container">
+        <header>Registration Form</header>
+        <form action="#" class="form">
+
+            <div class="column">
+                <div class="input-box">
+                    <label>First Name</label>
+                    <input type="text" placeholder="First Name" required = "true" />
+                </div>
+                <div class="input-box">
+                    <label>Last Name</label>
+                    <input type="text" placeholder="Last Name" required = "true" />
+                </div>
+            </div>
+
+            <div class="gender-box">
+                <h3>Gender</h3>
+                <div class="gender-option">
+                    <div class="gender">
+                        <input type="radio" id="check-male" name="gender" required = "true" />
+                        <label for="check">Male</label>
+                    </div>
+                    <div class="gender">
+                        <input type="radio" id="check-female" name="gender" required = "true" />
+                        <label for="check">Female</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-birthday">
+                <label for="birthday">Birthday</label>
+                <input type="date" id="birthdayText" class="custom-date-input" placeholder="dd/mm/yyyy" required = "true" />
+            </div>
+
+            <div class="input-box">
+                <label>Where are you from ?</label>
+                <input type="text" placeholder="City" required = "true" />
+                <div class="select-box" onchange="updateSelectColor(this)">
+                    <select required = "true">
+                        <option disabled="true" selected="true" hidden="true">Country</option>
+                        <!-- Add the country options here -->
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <label>What is your goal to achieve ?</label>
+                <div class="select-box" onchange="updateSelectColor(this)">
+                    <select required = "true">
+                        <option disabled="true" selected="true" hidden="true">Your Goal ?</option>
+                        <option value="">Lose weight</option>
+                        <option value="">Maintain weight</option>
+                        <option value="">Gain weight</option>
+                        <option value="">Gain muscles</option>
+                        <option value="">Modify my diet</option>
+                        <option value="">Manage stress</option>
+                        <option value="">Increase step count</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <label>What is your activity level ?</label>
+                <div class="select-box" onchange="updateSelectColor(this)">
+                    <select required = "true">
+                        <option disabled="true" selected="true" hidden="true">Activity level ?</option>
+                        <option value="">Not Very Active (Spend most of the day sitting)</option>
+                        <option value="">Lightly Active (Spend a good part of the day on your feet)</option>
+                        <option value="">Active (Spend a good part of the day doing some physical activity )</option>
+                        <option value="">Very Active (Spend a good part of the day doing heavy physical activity)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="input-box">
+                    <label>How tall are you ? (in cm)</label>
+                    <input type="text" placeholder="Your Height" required = "true" />
+                </div>
+                <div class="input-box">
+                    <label>How much do you weigh ? (in kg)</label>
+                    <input type="number" placeholder="Your Weight" required = "true" />
+                </div>
+            </div>
+
+            <div class="input-box">
+                <label>What's your goal weight? ? (in centimeter)</label>
+            </div>
+            <div class="input-box">
+                <input type="number" placeholder="Your Goal Weight" required = "true" />
+            </div>
+
+            <button>Submit</button>
+        </form>
+    </section>
+
+    <script src="/JSFjack/static/js/RegisterPage_script.js"></script>
 </h:body>
 </html>
