@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import db.dao.user.IUser;
 import db.dao.user.UserDao;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.ExternalContext;
@@ -24,14 +25,38 @@ public class User implements Serializable {
 	
 	private db.models.User user;
 	
+	private String email ; 
+	private String login ; 
+	private String password ; 
+	
+	
+	@PostConstruct
+    public void init() {
+        // Initialize the user property
+        user = new db.models.User();
+    }
+	
+	
+	
 	public db.models.User getUser()
 	{
 		return user;
 	}
 
 	
-	private String login ; 
-	private String password ; 
+	public void setUser(db.models.User user)
+	{
+		this.user = user;
+	}
+	
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	
 	
 	public String getLogin() {
@@ -88,22 +113,50 @@ public class User implements Serializable {
 		return 10;
 	}
 	
+	public String submitRegisterHomePage()
+	{
+		if( user.getUsername() != null && user.getEmail() != null && password != null )
+		{
+			return "/eng/register.xhtml";
+		}
+		return "/eng/home.xhtml";
+	}
+	
+	public String submitRegister()
+	{
+		
+		if (user == null || user.getUsername() == null || user.getFirst_name() == null || user.getLast_name() == null ||
+			    user.getEmail() == null || user.getStatus() == null || user.getSex() == null ||
+			    user.getBirthday() == null || user.getCity() == null || user.getCountry() == null ||
+			    user.getGoal() == null)
+		{
+			return "/eng/home.xhtml";
+		}else {
+			IUser userDao = new UserDao();
+			userDao.addUser(user, password);
+			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            session.setAttribute("user", user);
+            password = null ; // for security purposes
+			return "/eng/user/dashbord.xhtml";
+		}
+	}
+	
 	
 	
 	public String submitLogin() {
         IUser userDao = new UserDao();
         
         
-        user = userDao.getUser(login,password);
+        user = userDao.getUser(user.getUsername(),password);
         
         if (user != null) {
         	HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             session.setAttribute("user", user);
         	// Redirect to a secure page
-            System.out.println("I'm logged in bro");
+            password = null ; // for security purposes 
             return "/eng/user/dashbord.xhtml?faces-redirect=true";
         } else {
-            return "login.xhtml"; // Stay on the same page
+            return "/eng/home.xhtml"; // Stay on the same page
         }
     }
 	

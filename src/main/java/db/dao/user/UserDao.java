@@ -16,25 +16,6 @@ import db.models.User;
 
 public class UserDao  implements IUser {
 	
-	private static String configPath = "C:\\Users\\ouchi\\eclipse-workspace\\FoodBr\\config.properties";
-	
-	private static String storedSalt()
-	{
-		Properties properties = new Properties();
-		
-		// provide FileInputStream with the path for your config.properties file
-		
-        try (FileInputStream input = new FileInputStream(configPath)) 
-        {
-            properties.load(input);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        String storedSalt = properties.getProperty("salt");
-		return storedSalt;	
-	}
-	
 	private DbInteractor db ;
 	
 	public UserDao() {
@@ -62,13 +43,18 @@ public class UserDao  implements IUser {
 				user.setFirst_name(res.getString(3));
 				user.setLast_name(res.getString(4));
 				user.setEmail(res.getString(5));
-				user.setStatus(res.getString(7));
-				user.setSex(res.getString(8));
-				user.setBirthday(res.getString(9));
-				user.setHeight(res.getInt(10));
-				user.setWeight(res.getInt(11));
 				
-				users.add(user);
+				user.setSex(res.getString(7));
+				user.setBirthday(res.getString(8));
+				user.setHeight(res.getInt(9));
+				user.setWeight(res.getInt(10));
+				// 11
+				user.setPhoneNumber(res.getString(12));
+				user.setStatus(res.getString(13));
+				user.setCity(res.getString(14));
+				user.setCountry(res.getString(15));
+				user.setGoalWeight(res.getInt(16));
+				user.setGoal(res.getString(17));
 			}
 		} catch (SQLException e) {
 			System.out.println("getUsers error");
@@ -83,8 +69,8 @@ public class UserDao  implements IUser {
 		String salt = BCrypt.gensalt();
 		String hashedPassword = BCrypt.hashpw(password,salt );
 		
-		String sql = "INSERT INTO users (username, first_name, last_name, email, password ,status, sex, birthday, height, weight,salt)"
-				+ "VALUES ('"+user.getUsername()+"','"+user.getFirst_name()+"', '"+user.getLast_name()+"', '"+user.getEmail()+"', '"+hashedPassword+"', '"+user.getStatus()+"', '"+user.getSex()+"', '"+user.getBirthday()+"', "+user.getHeight()+", "+user.getWeight()+",'"+salt+"');";
+		String sql = "INSERT INTO users (username, first_name, last_name, email, password, sex, birthday, height, weight,salt ,phone, status , city , country , goalweight , goal )"
+				+ "VALUES ('"+user.getUsername().toLowerCase()+"','"+user.getFirst_name().toLowerCase()+"', '"+user.getLast_name().toLowerCase()+"', '"+user.getEmail().toLowerCase()+"', '"+hashedPassword+"','"+user.getSex().toLowerCase()+"', '"+user.getBirthday()+"', "+user.getHeight()+", "+user.getWeight()+",'"+salt+"','"+user.getPhoneNumber()+"','"+user.getStatus()+"','"+user.getCity()+"','"+user.getCountry()+"','"+user.getGoalWeight()+"','"+user.getGoal()+"');";
 		
 		int res = db.maj(sql);
 		
@@ -106,11 +92,18 @@ public class UserDao  implements IUser {
 				user.setFirst_name(res.getString(3));
 				user.setLast_name(res.getString(4));
 				user.setEmail(res.getString(5));
-				user.setStatus(res.getString(7));
-				user.setSex(res.getString(8));
-				user.setBirthday(res.getString(9));
-				user.setHeight(res.getInt(10));
-				user.setWeight(res.getInt(11));
+				
+				user.setSex(res.getString(7));
+				user.setBirthday(res.getString(8));
+				user.setHeight(res.getInt(9));
+				user.setWeight(res.getInt(10));
+				// 11
+				user.setPhoneNumber(res.getString(12));
+				user.setStatus(res.getString(13));
+				user.setCity(res.getString(14));
+				user.setCountry(res.getString(15));
+				user.setGoalWeight(res.getInt(16));
+				user.setGoal(res.getString(17));
 			}
 		} catch (SQLException e) {
 			System.out.println("getUser error");
@@ -121,7 +114,7 @@ public class UserDao  implements IUser {
 
 	@Override
 	public int editUser(int id,User user) {
-		String sql = "UPDATE users SET username='"+user.getUsername()+"', first_name='"+user.getFirst_name()+"', last_name='"+user.getLast_name()+"', email='"+user.getEmail()+"', status='"+user.getStatus()+"', sex='"+user.getSex()+"', birthday='"+user.getBirthday()+"', height='"+user.getHeight()+"', weight='"+user.getWeight()+"' WHERE user_id="+user.getId()+"";
+		String sql = "UPDATE users SET username='"+user.getUsername()+"', first_name='"+user.getFirst_name()+"', last_name='"+user.getLast_name()+"', email='"+user.getEmail()+"',sex='"+user.getSex()+"', birthday='"+user.getBirthday()+"', height='"+user.getHeight()+"', weight='"+user.getWeight()+"' , phone = '"+user.getPhoneNumber()+"', status='"+user.getStatus()+"' , city = '"+user.getCity()+"', country = '"+user.getCountry()+"' , goalweight='"+user.getGoalWeight()+"' , goal = '"+user.getGoal()+"' WHERE user_id="+user.getId()+"";
 		System.out.println(sql);
 		int res = db.maj(sql);
 		return res;	
@@ -147,7 +140,7 @@ public class UserDao  implements IUser {
 			{
 				
 				
-				String salt = res.getString(12); // 12 is the column index for salt column in the database 
+				String salt = res.getString(11); // 12 is the column index for salt column in the database 
 				String hashedPassword = res.getString(6);
 				String _hashedPassword = BCrypt.hashpw(password,salt);
 				
@@ -160,11 +153,19 @@ public class UserDao  implements IUser {
 					user.setFirst_name(res.getString(3));
 					user.setLast_name(res.getString(4));
 					user.setEmail(res.getString(5));
-					user.setStatus(res.getString(7));
-					user.setSex(res.getString(8));
-					user.setBirthday(res.getString(9));
-					user.setHeight(res.getInt(10));
-					user.setWeight(res.getInt(11));
+					
+					user.setSex(res.getString(7));
+					user.setBirthday(res.getString(8));
+					user.setHeight(res.getInt(9));
+					user.setWeight(res.getInt(10));
+					// 11
+					user.setPhoneNumber(res.getString(12));
+					user.setStatus(res.getString(13));
+					user.setCity(res.getString(14));
+					user.setCountry(res.getString(15));
+					user.setGoalWeight(res.getInt(16));
+					user.setGoal(res.getString(17));
+					
 				}
 				
 				
@@ -176,8 +177,4 @@ public class UserDao  implements IUser {
 		return user ;
 	}
 	
-	public String getTest()
-	{
-		return "hello world";
-	}
 }

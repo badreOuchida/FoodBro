@@ -15,6 +15,6 @@ public interface IUser {
 	public int editUser(int id, User newdb_user);
 	public int deleteUser(int id);
 
-	public String getTest();
+	
 	
 }

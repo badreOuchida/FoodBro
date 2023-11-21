@@ -86,6 +86,7 @@ public class DbInteractor {
 	public int maj(String sql)
 	{
 		
+		System.out.println(sql);
 		int nb = 0;
 		try {
 			nb = st.executeUpdate(sql);
