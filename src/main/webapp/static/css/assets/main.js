@@ -194,6 +194,7 @@ iconClose_2.addEventListener('click', () => {
 });
 
 function addIngredient() {
+	console.log("yes clicked")
     // Clone the template node
     const ingredientTemplate = document.querySelector('.ingredient-row');
     const newIngredient = ingredientTemplate.cloneNode(true);
@@ -211,10 +212,6 @@ function addIngredient() {
     attachCalculCaloriesListeners();
 }
 
-
-document.querySelector(".ingredient-name").onchange = ()=>{
-	console.log("hello wolrd inside change")
-}
 
 
 function attachAutocompleteIngredientListeners() {
@@ -235,7 +232,7 @@ function attachAutocompleteIngredientListeners() {
             const input = inputBox.value;
 
             try {
-                const result = await fetchIngredientData(input);
+                //const result = await fetchIngredientData(input); // to 
                 display(result, index, resultsBoxes[index]);
                 if (!result.length) {
                     resultsBoxes[index].innerHTML = '';
@@ -250,13 +247,10 @@ function attachAutocompleteIngredientListeners() {
 }
 
 function attachCalculCaloriesListeners() {
-	    console.log("start")
-
     const ingredientInputs = document.querySelectorAll('.ingredient-name, .ingredient-quantity');
     ingredientInputs.forEach((input) => {
         input.addEventListener('input', calculateCalories);
     });
-    
 }
 
 async function fetchRecipeData(input) {

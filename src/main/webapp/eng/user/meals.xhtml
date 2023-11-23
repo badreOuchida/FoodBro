@@ -140,10 +140,10 @@
                         <div class="adding-meals-row">
                             <ul>
                                 <li>
-                                    <p:commandButton class="dish-add-btn new-meal" value="Custom a new meal" action="#{bean.customMeal}" />
+                                    <p:commandButton class="dish-add-btn new-meal" value="Custom a new meal"  />
                                 </li>
                                 <li>
-                                    <p:commandButton class="dish-add-btn default-meal" value="Choose from our meals" action="#{bean.chooseMeal}" />
+                                    <p:commandButton class="dish-add-btn default-meal" value="Choose from our meals"  />
                                 </li>
                             </ul>
                         </div>
@@ -200,7 +200,7 @@
                 <h2>Custom a new meal</h2>
                 <h:form id="mealForm">
                     <div class="input-box-name">
-                        <p:inputText id="MealName" value="#{bean.mealName}" autocomplete="off" />
+                        <p:inputText id="MealName" value="#{meal.meal.name}" autocomplete="off" />
                         <p:outputLabel for="MealName" value="Meal Name" />
                     </div>
         
@@ -208,47 +208,30 @@
                         <div class="ingredient-row">
                             <div>
                                 <div class="input-box-ingredient-name">
-                                    <p:inputText id="ingredientName1" value="#{bean.ingredientName}" styleClass="ingredient-name" required="true" />
+                                    <p:inputText id="ingredientName1" value="#{ingredient.ingredient.name}" styleClass="ingredient-name" required="true" />
                                     <p:outputLabel for="ingredientName1" value="Ingredient" />
                                 </div>
                                 <div class="result-box">
                                 </div>
                             </div>
                             <div class="input-box-quantity">
-                                <p:inputText id="ingredientQuantity1" value="#{bean.ingredientQuantity}" styleClass="ingredient-quantity" required="true" />
+                                <p:inputText id="ingredientQuantity1" value="#{ingredient.ingredient.quantity}" styleClass="ingredient-quantity" required="true" />
                                 <p:outputLabel for="ingredientQuantity1" value="Quantity (g)" />
                             </div>
                             <div class="calories-column">
-                                <p:inputText id="calories2" styleClass="calories" value="#{bean.calories}" readonly="true" />
+                                <p:inputText id="calories2" styleClass="calories" value="#{ingredient.ingredient.calories}" readonly="true" />
                                 <p:outputLabel for="calories2" value="Calories" />
-                            </div>
-                        </div>
-                        <div class="ingredient-row">
-                            <div>
-                                <div class="input-box-ingredient-name">
-                                    <p:inputText id="ingredientName2" value="#{bean.ingredientName}" styleClass="ingredient-name" required="true" />
-                                    <p:outputLabel for="ingredientName2" value="Ingredient" />
-                                </div>
-                                <div class="result-box">
-                                </div>
-                            </div>
-                            <div class="input-box-quantity">
-                                <p:inputText id="ingredientQuantity2" value="#{bean.ingredientQuantity}" styleClass="ingredient-quantity" required="true" />
-                                <p:outputLabel for="ingredientQuantity2" value="Quantity (g)" />
-                            </div>
-                            <div class="calories-column">
-                                <p:inputText id="calories1" styleClass="calories" value="#{bean.calories}" readonly="true" />
-                                <p:outputLabel for="calories1" value="Calories" />
                             </div>
                         </div>
                     </div>
         
-                    <p:commandButton class="dish-add-btn" value="Add Ingredient" onclick="addIngredient()" />
-                    <p:commandButton class="dish-add-btn" value="Remove Last Ingredient" onclick="removeLastIngredient()" />
+                    <p:commandButton class="dish-add-btn" value="Add Ingredient" type="submit" action="#{ingredient.addIngredient}" onclick="addIngredient()" />
+                    <p:commandButton class="dish-add-btn" value="Remove Last Ingredient" type="submit" action="#{ingredient.removeIngredient}" onclick="removeLastIngredient()" />
 
                     <hr class="separator" />
                     <span class="total-calories"></span>
-                    <p:commandButton type="submit" class="dish-add-btn submit-button" value="Submit" action="#{bean.submit}" />
+                    <p:commandButton type="submit" class="dish-add-btn submit-button" value="Submit"  />
+                    
                 </h:form>
             </div>
         </div>
@@ -260,14 +243,14 @@
                 <h2>Choose from our meals</h2>
                 <h:form id="DefaultMealForm">
                     <div class="input-box-name">
-                        <p:inputText id="ourMealName" value="#{bean.ourMealName}" autocomplete="off" />
+                        <p:inputText id="ourMealName"  autocomplete="off" />
                         <p:outputLabel for="ourMealName" value="Meal Name" />
                     </div>
                     <div class="result-box-recepe">
                     </div>
 
                     <span class="total-calories total-calories-recipe" data-calories=""></span>
-                    <p:commandButton type="submit" class="dish-add-btn submit-button" value="Submit" action="#{bean.submit}" />
+                    <p:commandButton type="submit" class="dish-add-btn submit-button" value="Submit"  />
                 </h:form>
             </div>
         </div>
