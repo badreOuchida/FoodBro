@@ -46,18 +46,18 @@
 							<i class="pi pi-sign-out"></i>
 						</div>
 						<div class="menu-container">
-							<a href="/eng/dashbord.xhtml">	
+							<a href="/JSFjack/eng/user/dashbord.xhtml">	
 								<i class="pi pi-home"></i>
 							</a>
-							<a href="meals.xhtml">	
+							<a href="/JSFjack/eng/user/exercice.xhtml">	
 								<i class="pi pi-list"></i>
 							</a>
 							
-							<a href="exercice.xhtml">	
+							<a href="/JSFjack/eng/user/meals.xhtml">	
 								<i class="pi pi-sort-amount-up-alt"></i>
 							</a>
 							
-							<a href="user.xhtml">	
+							<a href="/JSFjack/eng/user/user.xhtml">	
 								<i class="pi pi-user"></i>
 							</a>
 							
@@ -79,7 +79,7 @@
 			<div class="d-flex justify-content-between">
 				<div class="">
 					<h1>
-						Hello #{user.nom} #{user.prenom} ,
+						Hello #{user.user.first_name} #{user.user.last_name} ,
 					</h1>
 					
 					<p class="fs-5 fw-medium text-secondary">
@@ -88,9 +88,6 @@
 				</div>
 				<div class="">
 					<span class="currente-date text-center fs-4 fw-medium"></span>
-					<p class="fs-5 fw-medium text-secondary">
-						Remaining days : #{user.remainingDates}
-					</p>
 				</div>
 			</div>
 		</div>

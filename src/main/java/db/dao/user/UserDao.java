@@ -161,6 +161,9 @@ public class UserDao  implements IUser {
 					// 11
 					user.setPhoneNumber(res.getString(12));
 					user.setStatus(res.getString(13));
+					System.out.println("user status est :" + res.getString(13) );
+					System.out.println("user status est :" + user.getStatus() );
+					
 					user.setCity(res.getString(14));
 					user.setCountry(res.getString(15));
 					user.setGoalWeight(res.getInt(16));

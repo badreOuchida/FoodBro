@@ -37,10 +37,7 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", first_name=" + first_name + ", last_name=" + last_name + ", birtday=" + birthday + "]";
-	}
+	
 	
 	public int getGoalWeight() {
 		return goalWeight;

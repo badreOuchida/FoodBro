@@ -257,7 +257,7 @@ function attachAutocompleteIngredientListeners() {
             const input = inputBox.value;
 
             try {
-                //const result = await fetchIngredientData(input); // to 
+                const result = await fetchIngredientData(input); // to 
                 display(result, index, resultsBoxes[index]);
                 if (!result.length) {
                     resultsBoxes[index].innerHTML = '';

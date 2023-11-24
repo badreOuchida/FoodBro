@@ -31,10 +31,10 @@ public class AuthenticationFilter implements Filter {
     	if(session != null && session.getAttribute("user") != null) {
     		chain.doFilter(request, response); 
     	}else {
-    		chain.doFilter(request, response); // to change it back just for testing purposes 
-    		/*
     		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
     	    httpServletResponse.sendRedirect("/JSFjack/eng/home.xhtml");
+    		/*
+    		   chain.doFilter(request, response); // to change it back just for testing purposes 
     	    */
     	}
 
