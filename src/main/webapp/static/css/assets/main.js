@@ -193,8 +193,31 @@ iconClose_2.addEventListener('click', () => {
     resetDefaultNewMealForm();
 });
 
+function updateLastIngredientName() {
+        // Get the last ingredient input element
+        var lastIngredientInput = document.querySelectorAll('.ingredient-name')[document.querySelectorAll('.ingredient-name').length - 1];
+        
+        console.log("hi updateLastIngredientName")
+        
+        // Get the value of the last ingredient name
+        var lastIngredientName = lastIngredientInput.value;
+        
+       
+
+        // Set the value of the hidden input field
+        document.getElementById('mealForm:ingredientName').value = lastIngredientName;
+    }
+
+
+function submitMeal()
+{
+	updateLastIngredientName();
+}
+
+
 function addIngredient() {
-	console.log("yes clicked")
+	
+	updateLastIngredientName();
     // Clone the template node
     const ingredientTemplate = document.querySelector('.ingredient-row');
     const newIngredient = ingredientTemplate.cloneNode(true);
@@ -210,6 +233,8 @@ function addIngredient() {
     // Attach event listeners for autocompletion on the new line
     attachAutocompleteIngredientListeners();
     attachCalculCaloriesListeners();
+    
+    
 }
 
 

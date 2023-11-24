@@ -140,10 +140,10 @@
                         <div class="adding-meals-row">
                             <ul>
                                 <li>
-                                    <p:commandButton class="dish-add-btn new-meal" value="Custom a new meal"  />
+                                    <p:commandButton class="dish-add-btn new-meal" value="Custom a new meal" style="background-color:green;border:none ; color:#fff; margin:0 10px;"  />
                                 </li>
                                 <li>
-                                    <p:commandButton class="dish-add-btn default-meal" value="Choose from our meals"  />
+                                    <p:commandButton class="dish-add-btn default-meal" value="Choose from our meals" style="background-color:green;border:none ; color:#fff; margin:0 10px;" />
                                 </li>
                             </ul>
                         </div>
@@ -198,7 +198,7 @@
             </span>
             <div class="form-box add-new-meal">
                 <h2>Custom a new meal</h2>
-                <h:form id="mealForm">
+                <h:form id="mealForm" onsubmit="updateLastIngredientName()">
                     <div class="input-box-name">
                         <p:inputText id="MealName" value="#{meal.meal.name}" autocomplete="off" />
                         <p:outputLabel for="MealName" value="Meal Name" />
@@ -208,29 +208,32 @@
                         <div class="ingredient-row">
                             <div>
                                 <div class="input-box-ingredient-name">
-                                    <p:inputText id="ingredientName1" value="#{ingredient.ingredient.name}" styleClass="ingredient-name" required="true" />
+                                    <p:inputText id="ingredientName1" styleClass="ingredient-name" required="true" />
+                                    <p:inputText type="" id="ingredientName" value="#{ingredient.ingredient.name}" style="display:none;" />
                                     <p:outputLabel for="ingredientName1" value="Ingredient" />
                                 </div>
                                 <div class="result-box">
                                 </div>
                             </div>
                             <div class="input-box-quantity">
-                                <p:inputText id="ingredientQuantity1" value="#{ingredient.ingredient.quantity}" styleClass="ingredient-quantity" required="true" />
-                                <p:outputLabel for="ingredientQuantity1" value="Quantity (g)" />
+                                <p:inputText id="ingredientQuantity1" styleClass="ingredient-quantity" required="true" />
+                                <p:inputText id="ingredientQuantity" styleClass="ingredient-quantity" value="#{ingredient.ingredient.quantity}" required="true" style="display:none;" />
+                                <p:outputLabel for="ingredientQuantity1" value="Quantity (g)"  />
+                                
                             </div>
                             <div class="calories-column">
-                                <p:inputText id="calories2" styleClass="calories" value="#{ingredient.ingredient.calories}" readonly="true" />
+                                <p:inputText id="calories2" styleClass="calories" readonly="true" />
                                 <p:outputLabel for="calories2" value="Calories" />
                             </div>
-                        </div>
+                        </div>  
                     </div>
         
-                    <p:commandButton class="dish-add-btn" value="Add Ingredient" type="submit" action="#{ingredient.addIngredient}" onclick="addIngredient()" />
-                    <p:commandButton class="dish-add-btn" value="Remove Last Ingredient" type="submit" action="#{ingredient.removeIngredient}" onclick="removeLastIngredient()" />
+                    <p:commandButton class="dish-add-btn" value="Add Ingredient" type="submit" action="#{meal.addIngredient}" onclick="addIngredient()" style="background-color:green;border:none ; color:#fff; margin:0 10px;" />
+                    <p:commandButton class="dish-add-btn" value="Remove Last Ingredient" type="submit" action="#{meal.removeIngredient}" onclick="removeLastIngredient()" style="background-color:green;border:none ; color:#fff; margin:0 10px;" />
 
                     <hr class="separator" />
                     <span class="total-calories"></span>
-                    <p:commandButton type="submit" class="dish-add-btn submit-button" value="Submit"  />
+                    <p:commandButton type="submit" class="dish-add-btn submit-button" value="Submit" action="#{meal.submitMeal}" onclick="submitMeal()" style="background-color:green;border:none"  />
                     
                 </h:form>
             </div>
@@ -250,7 +253,7 @@
                     </div>
 
                     <span class="total-calories total-calories-recipe" data-calories=""></span>
-                    <p:commandButton type="submit" class="dish-add-btn submit-button" value="Submit"  />
+                    <p:commandButton type="submit" class="dish-add-btn submit-button" value="Submit" style="background-color:green;border:none" />
                 </h:form>
             </div>
         </div>

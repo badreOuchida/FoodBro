@@ -8,9 +8,18 @@ public class Ingredient {
 	private float calories; 
 	private float totalCalories;
 	
-	
-	
-	
+	public Ingredient(Ingredient ingredient) {
+		this.id = ingredient.id;
+		this.name = ingredient.name;
+		this.quantity = ingredient.quantity;
+		this.calories = ingredient.calories;
+		this.totalCalories = ingredient.totalCalories;
+	}
+
+	public Ingredient() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getId()
 	{
 		return this.id;
@@ -20,7 +29,6 @@ public class Ingredient {
 	{
 		this.id = id;
 	}
-	
 	public String getName() {
 		return name;
 	}

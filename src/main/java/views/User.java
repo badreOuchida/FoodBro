@@ -18,6 +18,18 @@ import jakarta.servlet.http.HttpSession;
 public class User implements Serializable {
 	
 	
+	private int id = 10;
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	private String nom = "Ouchida";
 	private String prenom = "Badre";
 	private String mail = "Ouchida2badre@gmail.com";
