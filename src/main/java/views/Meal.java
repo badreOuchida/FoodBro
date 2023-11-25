@@ -30,8 +30,21 @@ import jakarta.inject.Named;
 public class Meal implements Serializable {
 	
 	private db.models.Meal meal ;
+	List<db.models.Meal> recommendations = new ArrayList<>() ;
 	
 	
+	public List<db.models.Meal> getRecommendations()
+	{
+		return recommendations;
+	}
+
+	public void setRecommendations(List<db.models.Meal> recommendations) {
+		this.recommendations = recommendations;
+	}
+
+
+
+
 	@Inject
     private User user;
 	
@@ -46,6 +59,7 @@ public class Meal implements Serializable {
         meal = new db.models.Meal();
         meal.setIngrediens(new ArrayList<>());
         meal.setUser_id(user.getUser().getId());
+        fetchRecommendations();
  
         
         //getRecommendations();
@@ -81,29 +95,22 @@ public class Meal implements Serializable {
 	
 	
 	
-public String getRecommendations() {
+	public String fetchRecommendations() {
         
-		/*
+		
 		String response = null;
 		
-		// recommendations
-		List<db.models.Meal> recommendations = new ArrayList<>() ;
+		String apiEndpoint = "https://api.spoonacular.com/recipes/findByNutrients?apiKey=697c8d2d9a2443e8a2b006ee564e31ce&query&";
+	    String ingredientsParam = "minCalories=50&maxCalories="+(user.getUser().getCalories()/3)+"&minCarbs=10&maxCarbs="+(user.getUser().getCarbs())+"&minProtein=10&maxProtein="+(user.getUser().getProtein())+"&minFat=10&maxFat="+(user.getUser().getFats())+"&number=10";
+	    
+	    
+	    String endpoint = apiEndpoint+ingredientsParam;
 
-		
-		// get the old ingredients
-		List<db.models.Ingredient> old_ingredients ;
-		IIngredient ingredient = new IngredienDao();
-		old_ingredients = ingredient.getAllIngredient(user.getUser().getId());
-	
-		// prepare the url where to send 
-		String apiEndpoint = "https://api.spoonacular.com/recipes/findByIngredients";
-	    String ingredientsParam = "apples,flour,sugar";
-	    int numberParam = 2;
-	    String urlString = String.format("%s?ingredients=%s&number=%d&apiKey=697c8d2d9a2443e8a2b006ee564e31ce&query", apiEndpoint, ingredientsParam, numberParam);
-
+	    
+	    
 	    // send get request
 	    try {
-	        URL url = new URL(urlString);
+	        URL url = new URL(endpoint);
 	        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 	        connection.setRequestMethod("GET");
 
@@ -115,10 +122,24 @@ public String getRecommendations() {
 	        ObjectMapper objectMapper = new ObjectMapper();
 	        JsonNode jsonNode = objectMapper.readTree(response);
 	        
-	        for(int i = 0; i < numberParam ; i++)
+	        for(int i = 0; i < 10 ; i++)
 	        {
 	        	JsonNode recipy = jsonNode.get(i); // Assuming it's an array of recipes
-	        		
+	        	
+	        	System.out.println("recipy is  : " + recipy);
+	        	
+	        	db.models.Meal meal = new db.models.Meal();
+        		
+        		meal.setName(recipy.get("title").asText());
+	        	meal.setImage(recipy.get("image").asText());
+	        	meal.setTotal_calories(recipy.get("calories").asInt());
+	        	meal.setTotal_protein(recipy.get("protein").asInt());
+	        	meal.setTotal_fat(recipy.get("fat").asInt());
+	        	meal.setTotal_carhbohydrates(recipy.get("carbs").asInt());
+	        	
+	        	recommendations.add(meal);
+	        	
+	        	/*
 	        	db.models.Meal meal = new db.models.Meal();
 	        	
 	        	
@@ -135,18 +156,16 @@ public String getRecommendations() {
 		        _ingredient.setName(recipy.get("tilte").asText());
 		        String recipeName = recipy.get("tilte").asText();
 		        System.out.println(recipy);
+		        */
 	        	
-	        }
-	        
-	        
-	        
+	        }  
 	    } catch (IOException e) {
 	        // Handle exception
 	        e.printStackTrace();
 	    }
 	    
 	    System.out.println(recommendations);
-	    */
+	    
 	    return null;
 	}
 	

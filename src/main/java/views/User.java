@@ -167,10 +167,6 @@ public class User implements Serializable {
 		userDao.editUser(user.getId(), user);
 		
 		return "/eng/user/user.xhtml?faces-redirect=true";
-	}
-	
-	
-
-	
+	}	
 	
 }

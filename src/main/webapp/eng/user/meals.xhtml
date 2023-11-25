@@ -143,44 +143,21 @@
                             </ul>
                         </div>
                         <div class="menu-list-row">
-                            <div class="row g-xxl-5 bydefault_show" id="menu-dish">
-                                <div class="col-lg-4 col-sm-6 dish-box-wp breakfast" data-cat="breakfast">
-                                    <div class="dish-box text-center">
-                                        <div class="dist-img">
-                                            <img src="/JSFjack/static/css/assets/images/dish/1.png" alt="" />
-                                        </div>
-                                        <div class="dish-title">
-                                            <h3 class="h3-title">Fresh Chicken Veggies</h3>
-                                            <p>120 calories</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- 3 -->
-                                <div class="col-lg-4 col-sm-6 dish-box-wp lunch" data-cat="lunch">
-                                    <div class="dish-box text-center">
-                                        <div class="dist-img">
-                                            <img src="/JSFjack/static/css/assets/images/dish/3.png" alt="" />
-                                        </div>
-                                        <div class="dish-title">
-                                            <h3 class="h3-title">Panner Noodles</h3>
-                                            <p>100 calories</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- 5 -->
-                                <div class="col-lg-4 col-sm-6 dish-box-wp dinner" data-cat="dinner">
-                                    <div class="dish-box text-center">
-                                        <div class="dist-img">
-                                            <img src="/JSFjack/static/css/assets/images/dish/5.png" alt="" />
-                                        </div>
-                                        <div class="dish-title">
-                                            <h3 class="h3-title">Bread Boiled Egg</h3>
-                                            <p>120 calories</p>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="row g-xxl-5 bydefault_show">
+                            
+                            	<ui:repeat value="#{meal.recommendations}" var="value">
+                            		<div class="col-lg-4 col-sm-6 dish-box-wp" >
+	                                    <div class="dish-box text-center">
+	                                        <div class="dist-img">
+	                                            <img src="/JSFjack/static/css/assets/images/dish/1.png" alt="" />
+	                                        </div>
+	                                        <div class="dish-title">
+	                                            <h3 class="h3-title">#{value.name}</h3>
+	                                            <p>#{value.total_calories} calories</p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+			    				</ui:repeat>	
                             </div>
                         </div>
                     </div>

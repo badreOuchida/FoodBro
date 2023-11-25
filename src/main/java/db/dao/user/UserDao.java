@@ -178,6 +178,9 @@ public class UserDao  implements IUser {
 					user.setGoal(res.getString(17));
 					
 					user.setCalories(res.getDouble(18));
+					user.setProtein(res.getDouble(19));
+					user.setCarbs(res.getDouble(20));
+					user.setFats(res.getDouble(21));
 					
 				}
 				

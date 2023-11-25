@@ -64,6 +64,7 @@ public class Statistics implements Serializable {
 		}
 		total = breakfast + lunch + dinner;
 		
+		System.out.println("total est : " + total);
 
 		// total == 360
 		// calories == x 
