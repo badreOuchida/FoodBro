@@ -196,16 +196,18 @@ iconClose_2.addEventListener('click', () => {
 function updateLastIngredientName() {
         // Get the last ingredient input element
         var lastIngredientInput = document.querySelectorAll('.ingredient-name')[document.querySelectorAll('.ingredient-name').length - 1];
-        
-        console.log("hi updateLastIngredientName")
+        var lastCaloriesInput = document.querySelectorAll('.calories')[document.querySelectorAll('.calories').length - 1];
         
         // Get the value of the last ingredient name
         var lastIngredientName = lastIngredientInput.value;
+        var lastIngredientCalories = lastCaloriesInput.value;
         
        
 
         // Set the value of the hidden input field
+        console.log(lastCaloriesInput.value);
         document.getElementById('mealForm:ingredientName').value = lastIngredientName;
+        document.getElementById('mealForm:setCalories').value = lastIngredientCalories;
     }
 
 
@@ -325,6 +327,7 @@ function removeLastIngredient() {
 
 function testButton() {
     // Event listener for the filter buttons
+    console.log("button is clicked bro for breakfast");
     const filterButtons = document.querySelectorAll('.filter');
     const addNewMealButton = document.querySelector('.dish-add-btn.new-meal');
     const chooseFromOurMealsButton = document.querySelector('.dish-add-btn.default-meal');
@@ -337,9 +340,11 @@ function testButton() {
             if (filterValue === '.breakfast' || filterValue === '.lunch' || filterValue === '.dinner') {
                 addNewMealButton.style.display = 'block';
                 chooseFromOurMealsButton.style.display = 'block';
+                document.querySelector(".meal_type").value = filterValue.substring(1);
             } else {
                 addNewMealButton.style.display = 'none';
                 chooseFromOurMealsButton.style.display = 'none';
+                document.getElementById("meal_type").value = None;
             }
         });
     });
@@ -348,7 +353,6 @@ function testButton() {
 testButton();
 
 document.addEventListener('DOMContentLoaded', () => {
-	console.log("load");
     attachAutocompleteRecipesListeners();
     updateTotalCalories();
     attachAutocompleteIngredientListeners();
@@ -525,6 +529,7 @@ function calculateCalories(event) {
     if (ingredient && quantity) {
         fetchCalories(ingredient, quantity)
             .then(calories => {
+				
                 caloriesInput.value = calories;
                 updateTotalCalories();
             })

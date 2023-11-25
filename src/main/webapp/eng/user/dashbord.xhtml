@@ -50,9 +50,7 @@
 							<a href="/JSFjack/eng/user/dashbord.xhtml">	
 								<i class="pi pi-home"></i>
 							</a>
-							<a href="/JSFjack/eng/user/exercice.xhtml">	
-								<i class="pi pi-list"></i>
-							</a>
+							
 							
 							<a href="/JSFjack/eng/user/meals.xhtml">	
 								<i class="pi pi-sort-amount-up-alt"></i>
@@ -106,7 +104,7 @@
 						<!-- breakfast -->
 						<div class="meal-container d-flex justify-content-between my-2" style="align-items:baseline">
 							<div class="fs-3 fw-bolder">Breakfast</div>
-							<div class="fs-4 fw-medium text-secondary d-flex justify-content-center align-items-center">240kcal
+							<div class="fs-4 fw-medium text-secondary d-flex justify-content-center align-items-center">#{statistics.breakfast} kcal
 								<i class="pi pi-angle-up" style="font-size:1.5rem; color:green"></i>
 							</div>
 						</div>
@@ -114,7 +112,7 @@
 						<!-- lunch -->
 						<div class="meal-container d-flex justify-content-between my-2" style="align-items:baseline">
 							<div class="fs-3 fw-bolder">Lunch</div>
-							<div class="fs-4 fw-medium text-secondary d-flex justify-content-center align-items-center">240kcal
+							<div class="fs-4 fw-medium text-secondary d-flex justify-content-center align-items-center">#{statistics.lunch} kcal
 								<i class="pi pi-angle-up" style="font-size:1.5rem; color:green"></i>
 							</div>
 						</div>
@@ -122,27 +120,17 @@
 						<!-- dinner -->
 						<div class="meal-container d-flex justify-content-between my-2" style="align-items:baseline">
 							<div class="fs-3 fw-bolder">Dinner</div>
-							<div class="fs-4 fw-medium text-secondary d-flex justify-content-center align-items-center">240kcal
+							<div class="fs-4 fw-medium text-secondary d-flex justify-content-center align-items-center">#{statistics.dinner} kcal
 								<i class="pi pi-angle-up" style="font-size:1.5rem; color:green"></i>
 							</div>
 						</div>
-						<!-- exercices -->
-						<div class="meal-container d-flex justify-content-between my-2" style="align-items:baseline">
-							<div class="fs-3 fw-bolder">Burned</div>
-							<div class="fs-4 fw-medium text-secondary d-flex justify-content-center align-items-center">240kcal
-								<i class="pi pi-angle-down" style="font-size:1.5rem; color:red"></i>
-							</div>
-						</div>	
+					
 						
 						<!-- buttons -->
 					</div>
 					<div>
 						<div class="add-meal my-2">
 							<a role="button" href="/JSFjack/eng/user/meals.xhtml" class="btn btn-outline-success" style="width:100%">Add meal</a>
-						</div>
-						
-						<div class="add-exercice my-2">
-							<a role="button" href="/JSFjack/eng/user/exercice.xhtml" class="btn btn-outline-danger" style="width:100%">Add exercice</a>
 						</div>
 					</div>
 				
@@ -154,14 +142,14 @@
 			<div class="purpose-dashbord shadow rounded bg-light">
 				<div class="circulare-progress-barre d-flex justify-content-center align-items-center" style="height:100%;">
 					<div class="progress-barre-container">
-						<div class="progress-barre-outer" style="background:conic-gradient(#000 #{chartJsView.deg} , #c0c0c0 0deg );">
+						<div class="progress-barre-outer" style="background:conic-gradient(#000 #{statistics.calories_percentage}deg , #c0c0c0 0deg );">
 							<div class="progress-barre-inner d-flex flex-column align-items-center justify-content-center">
 								<div class="fs-6 fw-bolder">
 									Amount of calories eaten: 
 								</div>
 								
 								<div class="fs-6 fw-medium text-secondary">
-									2700cal / 3700cal
+									#{statistics.total} / #{statistics.user.user.calories}
 								</div>
 							</div>
 						</div>

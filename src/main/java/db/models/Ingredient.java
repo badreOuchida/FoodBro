@@ -64,6 +64,12 @@ public class Ingredient {
 	public void setTotalCalories(float totalCalories) {
 		this.totalCalories = totalCalories;
 	}
+
+	@Override
+	public String toString() {
+		return "Ingredient [id=" + id + ", name=" + name + ", quantity=" + quantity + ", calories=" + calories
+				+ ", totalCalories=" + totalCalories + ", times=" + times + "]";
+	}
 	
 	
 

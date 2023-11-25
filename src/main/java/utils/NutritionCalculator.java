@@ -54,6 +54,8 @@ public class NutritionCalculator {
                 return 1.0; // Default to sedentary
         }
     }
+    
+    
 
 	public static double getBmr() {
 		return bmr;

@@ -1,12 +1,14 @@
 package views;
 
 import java.io.Serializable;
+import java.util.List;
 
+import db.dao.meal.IMeal;
+import db.dao.meal.MealDao;
 import db.dao.user.IUser;
 import db.dao.user.UserDao;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
@@ -14,11 +16,16 @@ import jakarta.servlet.http.HttpSession;
 import utils.NutritionCalculator;
 
 
+
+
 @Named
 @SessionScoped
 public class User implements Serializable {
 	
 	
+	
+	
+
 	private db.models.User user;
 	
 	private String email ; 
@@ -31,6 +38,7 @@ public class User implements Serializable {
         // Initialize the user property
         user = new db.models.User();
     }
+	
 	
 	
 	
@@ -59,6 +67,8 @@ public class User implements Serializable {
 		return login;
 	}
 
+	
+	
 	public void setLogin(String login) {
 		this.login = login;
 	}
@@ -158,5 +168,9 @@ public class User implements Serializable {
 		
 		return "/eng/user/user.xhtml?faces-redirect=true";
 	}
+	
+	
+
+	
 	
 }

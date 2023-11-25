@@ -56,6 +56,7 @@ public class UserDao  implements IUser {
 				user.setCountry(res.getString(15));
 				user.setGoalWeight(res.getInt(16));
 				user.setGoal(res.getString(17));
+				user.setCalories(res.getDouble(18));
 			}
 		} catch (SQLException e) {
 			System.out.println("getUsers error");
@@ -107,6 +108,8 @@ public class UserDao  implements IUser {
 				user.setCountry(res.getString(15));
 				user.setGoalWeight(res.getInt(16));
 				user.setGoal(res.getString(17));
+				
+				user.setCalories(res.getDouble(18));
 			}
 		} catch (SQLException e) {
 			System.out.println("getUser error");
@@ -173,6 +176,8 @@ public class UserDao  implements IUser {
 					user.setCountry(res.getString(15));
 					user.setGoalWeight(res.getInt(16));
 					user.setGoal(res.getString(17));
+					
+					user.setCalories(res.getDouble(18));
 					
 				}
 				

@@ -49,9 +49,7 @@
 							<a href="/JSFjack/eng/user/dashbord.xhtml">	
 								<i class="pi pi-home"></i>
 							</a>
-							<a href="/JSFjack/eng/user/exercice.xhtml">	
-								<i class="pi pi-list"></i>
-							</a>
+							
 							
 							<a href="/JSFjack/eng/user/meals.xhtml">	
 								<i class="pi pi-sort-amount-up-alt"></i>
@@ -196,6 +194,9 @@
             <div class="form-box add-new-meal">
                 <h2>Custom a new meal</h2>
                 <h:form id="mealForm" onsubmit="updateLastIngredientName()">
+                	
+                	<p:inputText value="#{meal.meal.meal_type}" id="meal_type" styleClass="meal_type" required="true" style="display:none;" />
+                	
                     <div class="input-box-name">
                         <p:inputText id="MealName" value="#{meal.meal.name}" autocomplete="off" />
                         <p:outputLabel for="MealName" value="Meal Name" />
@@ -220,6 +221,7 @@
                             </div>
                             <div class="calories-column">
                                 <p:inputText id="calories2" styleClass="calories" readonly="true" />
+                                <p:inputText type="" id="setCalories" readonly="true" value="#{ingredient.ingredient.calories}" />
                                 <p:outputLabel for="calories2" value="Calories" />
                             </div>
                         </div>  

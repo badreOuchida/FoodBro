@@ -13,6 +13,7 @@ import jakarta.inject.Named;
 @Named
 @ViewScoped
 public class Ingredient implements Serializable {
+	private int calories;
 	
 	private db.models.Ingredient ingredient = new db.models.Ingredient() ;
 	
@@ -22,5 +23,13 @@ public class Ingredient implements Serializable {
 	
 	public void setIngredient(db.models.Ingredient ingredient) {
 		this.ingredient = ingredient;
+	}
+
+	public int getCalories() {
+		return calories;
+	}
+
+	public void setCalories(int calories) {
+		this.calories = calories;
 	}	
 }

@@ -15,6 +15,7 @@ public class Meal {
 	private int total_fat = 50;
 	private int total_protein = 50;
 	private int total_carhbohydrates = 50;
+	private String meal_type;
 	
 	private List<Ingredient> ingrediens;
 	
@@ -96,6 +97,14 @@ public class Meal {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getMeal_type() {
+		return meal_type;
+	}
+
+	public void setMeal_type(String meal_type) {
+		this.meal_type = meal_type;
 	}
 	
 	
