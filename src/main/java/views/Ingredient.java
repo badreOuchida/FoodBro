@@ -1,6 +1,8 @@
 package views;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;

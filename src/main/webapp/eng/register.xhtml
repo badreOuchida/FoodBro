@@ -38,6 +38,11 @@
                 </div>
             </div>
             
+            <div class="input-birthday">
+             	<label>Phone Number</label>
+                <p:inputText  value="#{user.user.phoneNumber}" required="true"/>   
+             </div>
+            
             <div class="gender-box">
                 <h3>Gender</h3>
                 <div class="gender-option">
@@ -325,10 +330,11 @@
                     
                     <p:selectOneMenu required="true" requiredMessage="Please select your activity level" value="#{user.user.status}" style="width:100%; margin:5px 0px">
 					    <f:selectItem itemLabel="Activity level ?" itemValue="" disabled="true" selected="true" hidden="true" />
-					    <f:selectItem itemLabel="Not Very Active (Spend most of the day sitting)" itemValue="Not Very Active" />
-					    <f:selectItem itemLabel="Lightly Active (Spend a good part of the day on your feet)" itemValue="Lightly Active" />
-					    <f:selectItem itemLabel="Active (Spend a good part of the day doing some physical activity)" itemValue="Active" />
-					    <f:selectItem itemLabel="Very Active (Spend a good part of the day doing heavy physical activity)" itemValue="Very Active" />
+					    <f:selectItem itemLabel="Sedentary" itemValue="1" />
+					    <f:selectItem itemLabel="Lightly active" itemValue="2" />
+					    <f:selectItem itemLabel="Moderately active" itemValue="3" />
+					    <f:selectItem itemLabel="Very active" itemValue="4" />
+					    <f:selectItem itemLabel="Extremely active" itemValue="5" />
 					</p:selectOneMenu>
                 </div>
             </div>

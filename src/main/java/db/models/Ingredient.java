@@ -7,6 +7,7 @@ public class Ingredient {
 	private int quantity;
 	private float calories; 
 	private float totalCalories;
+	private int times = 1;
 	
 	public Ingredient(Ingredient ingredient) {
 		this.id = ingredient.id;
@@ -20,6 +21,16 @@ public class Ingredient {
 		// TODO Auto-generated constructor stub
 	}
 
+	public int getTimes()
+	{
+		return this.times;
+	}
+	
+	public void setTimes(int times)
+	{
+		this.times = times;
+	}
+	
 	public int getId()
 	{
 		return this.id;

@@ -13,6 +13,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import db.conn.DbInteractor;
 
 import db.models.User;
+import utils.NutritionCalculator;
 
 public class UserDao  implements IUser {
 	
@@ -69,8 +70,10 @@ public class UserDao  implements IUser {
 		String salt = BCrypt.gensalt();
 		String hashedPassword = BCrypt.hashpw(password,salt );
 		
-		String sql = "INSERT INTO users (username, first_name, last_name, email, password, sex, birthday, height, weight,salt ,phone, status , city , country , goalweight , goal )"
-				+ "VALUES ('"+user.getUsername().toLowerCase()+"','"+user.getFirst_name().toLowerCase()+"', '"+user.getLast_name().toLowerCase()+"', '"+user.getEmail().toLowerCase()+"', '"+hashedPassword+"','"+user.getSex().toLowerCase()+"', '"+user.getBirthday()+"', "+user.getHeight()+", "+user.getWeight()+",'"+salt+"','"+user.getPhoneNumber()+"','"+user.getStatus()+"','"+user.getCity()+"','"+user.getCountry()+"','"+user.getGoalWeight()+"','"+user.getGoal()+"');";
+		System.out.println("inside adduser : " + user.getCalories());
+		
+		String sql = "INSERT INTO users (username, first_name, last_name, email, password, sex, birthday, height, weight,salt ,phone, status , city , country , goalweight , goal , calories , protein, carbs , fats )"
+				+ "VALUES ('"+user.getUsername().toLowerCase()+"','"+user.getFirst_name().toLowerCase()+"', '"+user.getLast_name().toLowerCase()+"', '"+user.getEmail().toLowerCase()+"', '"+hashedPassword+"','"+user.getSex().toLowerCase()+"', '"+user.getBirthday()+"', "+user.getHeight()+", "+user.getWeight()+",'"+salt+"','"+user.getPhoneNumber()+"','"+user.getStatus()+"','"+user.getCity()+"','"+user.getCountry()+"','"+user.getGoalWeight()+"','"+user.getGoal()+"','"+user.getCalories()+"','"+user.getProtein()+"','"+user.getCarbs()+"','"+user.getFats()+"');";
 		
 		int res = db.maj(sql);
 		
@@ -114,7 +117,9 @@ public class UserDao  implements IUser {
 
 	@Override
 	public int editUser(int id,User user) {
-		String sql = "UPDATE users SET username='"+user.getUsername()+"', first_name='"+user.getFirst_name()+"', last_name='"+user.getLast_name()+"', email='"+user.getEmail()+"',sex='"+user.getSex()+"', birthday='"+user.getBirthday()+"', height='"+user.getHeight()+"', weight='"+user.getWeight()+"' , phone = '"+user.getPhoneNumber()+"', status='"+user.getStatus()+"' , city = '"+user.getCity()+"', country = '"+user.getCountry()+"' , goalweight='"+user.getGoalWeight()+"' , goal = '"+user.getGoal()+"' WHERE user_id="+user.getId()+"";
+		String sql = "UPDATE users SET username='"+user.getUsername()+"', first_name='"+user.getFirst_name()+"', last_name='"+user.getLast_name()+"', email='"+user.getEmail()+"',sex='"+user.getSex()+"', birthday='"+user.getBirthday()+"', height='"+user.getHeight()+"', weight='"+user.getWeight()+"' , phone = '"+user.getPhoneNumber()+"', status='"+user.getStatus()+"' , city = '"+user.getCity()+"', country = '"+user.getCountry()+"' "
+				+ ", goalweight='"+user.getGoalWeight()+"' , goal = '"+user.getGoal()+"', calories = '"+user.getCalories()+"' , protein = '"+user.getProtein()+"' , carbs = '"+user.getCarbs()+"' , fats = '"+user.getFats()+"' "
+						+ "WHERE user_id="+user.getId()+"";
 		System.out.println(sql);
 		int res = db.maj(sql);
 		return res;	

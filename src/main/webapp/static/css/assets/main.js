@@ -682,3 +682,7 @@ function resetDefaultNewMealForm() {
     const totalCaloriesElement = document.querySelector('.total-calories-recipe');
     totalCaloriesElement.textContent = '';
 }
+
+
+
+

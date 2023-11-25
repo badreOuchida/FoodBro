@@ -25,6 +25,11 @@ public class User {
 	
 	private String phoneNumber ;
 	
+	private double calories ; 
+	private double protein ; 
+	private double carbs;
+	private double fats;
+	
 	
 
 	
@@ -159,4 +164,39 @@ public class User {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
+
+	public double getCalories() {
+		return calories;
+	}
+
+	public void setCalories(double calories) {
+		this.calories = calories;
+	}
+
+	public double getProtein() {
+		return protein;
+	}
+
+	public void setProtein(double protein) {
+		this.protein = protein;
+	}
+
+	public double getCarbs() {
+		return carbs;
+	}
+
+	public void setCarbs(double carbs) {
+		this.carbs = carbs;
+	}
+
+	public double getFats() {
+		return fats;
+	}
+
+	public void setFats(double fats) {
+		this.fats = fats;
+	}
+
+	
 }
+

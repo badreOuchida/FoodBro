@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Meal {
 
+	private String image ;
+	
 	private int id;
 	private int  user_id;
 	private String name;
@@ -87,6 +89,15 @@ public class Meal {
 	public void setIngrediens(List<Ingredient> ingrediens) {
 		this.ingrediens = ingrediens;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
 	
 
 }

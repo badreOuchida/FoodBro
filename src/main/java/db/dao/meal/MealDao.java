@@ -34,7 +34,7 @@ public class MealDao implements IMeal {
 		for( Ingredient ingredient : meal.getIngrediens() )
 		{
 			System.out.println("inside add meal ingredient est : " + ingredient.getName());
-			db_ingredient.addIngredient(ingredient , _meal.getId());
+			db_ingredient.addIngredient(ingredient , _meal.getId() , _meal.getUser_id());
 		}
 		
 		return res;

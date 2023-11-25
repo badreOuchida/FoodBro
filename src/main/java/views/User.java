@@ -11,29 +11,13 @@ import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpSession;
+import utils.NutritionCalculator;
 
 
 @Named
 @SessionScoped
 public class User implements Serializable {
 	
-	
-	private int id = 10;
-	public int getId() {
-		return id;
-	}
-
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-
-	private String nom = "Ouchida";
-	private String prenom = "Badre";
-	private String mail = "Ouchida2badre@gmail.com";
-	private String phoneNumber = "0678488570";
 	
 	private db.models.User user;
 	
@@ -86,44 +70,6 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String number) {
-		this.phoneNumber = number;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-	
-	
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-	
-	public int getRemainingDates()
-	{
-		return 10;
-	}
 	
 	public String submitRegisterHomePage()
 	{
@@ -145,12 +91,27 @@ public class User implements Serializable {
 			return "/eng/home.xhtml";
 		}else {
 			IUser userDao = new UserDao();
+			
+			// calculate the nutrition factors
+			NutritionCalculator.calculateNutrition(user.getHeight(), user.getHeight(), user.getGoalWeight(), Integer.parseInt(user.getStatus()));
+	           
+            user.setCalories(NutritionCalculator.getCalories());
+            user.setProtein(NutritionCalculator.getProtein());
+            user.setCarbs(NutritionCalculator.getCarbs());
+            user.setFats(NutritionCalculator.getFats());
+            
+           
 			userDao.addUser(user, password);
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             session.setAttribute("user", user);
             password = null ; // for security purposes
+            
+            
+            
 			return "/eng/user/dashbord.xhtml";
 		}
+		
+		
 	}
 	
 	
@@ -183,6 +144,14 @@ public class User implements Serializable {
 	
 	public String submitEdit()
 	{
+		// calculate the nutrition factors
+		NutritionCalculator.calculateNutrition(user.getHeight(), user.getHeight(), user.getGoalWeight(), Integer.parseInt(user.getStatus()));
+			           
+		user.setCalories(NutritionCalculator.getCalories());
+		user.setProtein(NutritionCalculator.getProtein());
+		user.setCarbs(NutritionCalculator.getCarbs());
+		user.setFats(NutritionCalculator.getFats());
+		
 		IUser userDao = new UserDao();
         
 		userDao.editUser(user.getId(), user);
