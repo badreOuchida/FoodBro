@@ -12,8 +12,8 @@ public class Meal {
 	private String name;
 	private Date meal_date;
 	private int total_calories;
-	private int total_fat = 50;
-	private int total_protein = 50;
+	private int total_fat = 5;
+	private int total_protein = 20;
 	private int total_carhbohydrates = 50;
 	private String meal_type;
 	
