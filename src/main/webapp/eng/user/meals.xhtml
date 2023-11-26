@@ -146,17 +146,23 @@
                             <div class="row g-xxl-5 bydefault_show">
                             
                             	<ui:repeat value="#{meal.recommendations}" var="value">
-                            		<div class="col-lg-4 col-sm-6 dish-box-wp" >
-	                                    <div class="dish-box text-center">
-	                                        <div class="dist-img">
-	                                            <img src="/JSFjack/static/css/assets/images/dish/1.png" alt="" />
-	                                        </div>
-	                                        <div class="dish-title">
-	                                            <h3 class="h3-title">#{value.name}</h3>
-	                                            <p>#{value.total_calories} calories</p>
-	                                        </div>
-	                                    </div>
-	                                </div>
+                            		
+                            			<div class="col-lg-4 col-sm-6 dish-box-wp" >
+											<a href="/JSFjack/addmeal?id=#{user.user.id}&amp;name=#{value.name}&amp;type=#{meal.meal.meal_type}&amp;calories=#{value.total_calories}&amp;protein=#{value.total_protein}&amp;fat=#{value.total_fat}&amp;carbs=#{value.total_carhbohydrates}
+											">
+				                                    <div class="dish-box text-center">
+				                                        <div class="dist-img">
+				                                            <img src="/JSFjack/static/css/assets/images/dish/1.png" alt="" />
+				                                        </div>
+				                                        <div class="dish-title">
+				                                            <h3 class="h3-title">#{value.name}</h3>
+				                                            <p>#{value.total_calories} calories</p>
+				                                        </div>
+				                                    </div>
+			                                   </a>
+		                                </div>
+                            	
+                            		
 			    				</ui:repeat>	
                             </div>
                         </div>

@@ -20,6 +20,7 @@ public class IngredienDao implements IIngredient {
 	@Override
 	public int addIngredient(Ingredient ingredient, int meal_id,int user_id) {
 		
+		
 		String sql = "INSERT INTO ingredients (meal_id, ingredient_name , calories , user_id ) VALUES "
 				+ "('"+meal_id+"','"+ingredient.getName()+"','"+ingredient.getCalories()+"','"+user_id+"')";
 		
@@ -65,7 +66,7 @@ public class IngredienDao implements IIngredient {
 				Ingredient ingredient = new Ingredient();
 				
 				ingredient.setName(res.getString(1));
-				System.out.println("names are : " + res.getString(1));
+				
 				ingredient.setTimes(res.getInt(2));
 				
 				ingredients.add(ingredient);

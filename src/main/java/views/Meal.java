@@ -1,6 +1,7 @@
 package views;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -8,8 +9,11 @@ import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -50,6 +54,7 @@ public class Meal implements Serializable {
 	
 	@Inject
 	private Ingredient ingredient;
+	
 	
 	
 	
@@ -96,11 +101,23 @@ public class Meal implements Serializable {
 	
 	
 	public String fetchRecommendations() {
-        
 		
+Properties properties = new Properties();
+		
+		// provide FileInputStream with the path for your config.properties file
+		
+        try (FileInputStream input = new FileInputStream("C:\\Users\\ouchi\\eclipse-workspace\\FoodBr\\config.properties")) 
+        {
+            properties.load(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        String apiKey = properties.getProperty("apiKey");
+        	
 		String response = null;
 		
-		String apiEndpoint = "https://api.spoonacular.com/recipes/findByNutrients?apiKey=697c8d2d9a2443e8a2b006ee564e31ce&query&";
+		String apiEndpoint = "https://api.spoonacular.com/recipes/findByNutrients?apiKey="+apiKey+"&query&";
 	    String ingredientsParam = "minCalories=50&maxCalories="+(user.getUser().getCalories()/3)+"&minCarbs=10&maxCarbs="+(user.getUser().getCarbs())+"&minProtein=10&maxProtein="+(user.getUser().getProtein())+"&minFat=10&maxFat="+(user.getUser().getFats())+"&number=10";
 	    
 	    
@@ -125,17 +142,18 @@ public class Meal implements Serializable {
 	        for(int i = 0; i < 10 ; i++)
 	        {
 	        	JsonNode recipy = jsonNode.get(i); // Assuming it's an array of recipes
-	        	
-	        	System.out.println("recipy is  : " + recipy);
-	        	
 	        	db.models.Meal meal = new db.models.Meal();
         		
         		meal.setName(recipy.get("title").asText());
 	        	meal.setImage(recipy.get("image").asText());
 	        	meal.setTotal_calories(recipy.get("calories").asInt());
-	        	meal.setTotal_protein(recipy.get("protein").asInt());
-	        	meal.setTotal_fat(recipy.get("fat").asInt());
-	        	meal.setTotal_carhbohydrates(recipy.get("carbs").asInt());
+	        	String protein = recipy.get("protein").asText();
+	        	meal.setTotal_protein(Integer.parseInt(protein.substring(0,protein.length()-1)));
+	        	String fat = recipy.get("fat").asText();
+	        	meal.setTotal_fat(Integer.parseInt(fat.substring(0,fat.length()-1)));
+	        	
+	        	String carbs = recipy.get("carbs").asText();
+	        	meal.setTotal_carhbohydrates(Integer.parseInt(carbs.substring(0,carbs.length()-1)));
 	        	
 	        	recommendations.add(meal);
 	        	
@@ -164,8 +182,8 @@ public class Meal implements Serializable {
 	        e.printStackTrace();
 	    }
 	    
-	    System.out.println(recommendations);
 	    
+
 	    return null;
 	}
 	
